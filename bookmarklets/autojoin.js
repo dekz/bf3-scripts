@@ -1,0 +1,1 @@
+javascript:(function(){document.body.appendChild(document.createElement('script')).src='https://raw.github.com/dekz/bf3-scripts/master/scripts/autojoin.js';})();
