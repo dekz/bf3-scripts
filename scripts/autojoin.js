@@ -8,6 +8,7 @@
   
   
   var orig = gamemanager.handleErrors;
+  var currentServer;
 
   var tryToJoin = function(s) {
     $.get('http://battlelog.battlefield.com' + s + '/?json=1&join=true', {},
@@ -16,14 +17,17 @@
           joinflow._joinServer(response.data, null);
         } else {
           servers.push(s);
-          tryToJoin(servers.shift());
+          currentServer = servers.shift();
+          tryToJoin(currentServer);
         }
      });
   };
 
   var newErrorHandle = function (game,personaId,errorType,errorCode) {
     console.log('Error joining trying next server');
-    tryToJoin(servers.shift());
+    servers.push(currentServer);
+    currentServer = servers.shift();
+    tryToJoin(currentServer);
     orig(game,personaId,errorType,errorCode);
   };
 
