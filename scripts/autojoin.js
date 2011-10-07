@@ -32,6 +32,7 @@
   };
 
   gamemanager.handleErrors = newErrorHandle;
-  tryToJoin(servers.shift());
+  currentServer = servers.shift();
+  tryToJoin(currentServer);
 
 })();
